@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OAuthV2 name="OAuthV2-verify-jwt">
+    <Operation>VerifyJWTAccessToken</Operation>
+    <Algorithm>RS256</Algorithm>
+    <PublicKey>
+        <Value ref="propertyset.secrets.rsa-publickey-1"/>
+    </PublicKey>
+    <!--<Condition>(proxy.pathsuffix !~ "/ipification/api/v1/ipification/callback")</Condition>-->
+</OAuthV2>

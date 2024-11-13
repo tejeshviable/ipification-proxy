@@ -1,0 +1,13 @@
+<APIProxy revision='1' name='oauth2-cc'>
+  <ConfigurationVersion minorVersion='0' majorVersion='4'/>
+  <CreatedAt>1458959730864</CreatedAt>
+  <CreatedBy>tejeshvi</CreatedBy>
+  <Description>ipification</Description>
+  <DisplayName>oauth2-cc</DisplayName>
+  <LastModifiedAt>1464364344438</LastModifiedAt>
+  <LastModifiedBy>tejeshvi</LastModifiedBy>
+  <TargetEndpoints>
+    <TargetEndpoint>default</TargetEndpoint>
+    <TargetEndpoint>TargetEndpoint-1</TargetEndpoint>
+  </TargetEndpoints>
+</APIProxy>

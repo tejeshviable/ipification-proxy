@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>OAuthV2-verify-jwt</Name>
+                <Condition>(proxy.pathsuffix != "/api/v1/ipification/callback")</Condition>
+            </Step>
+        </Request>
+        <Response>
+            <Step>
+                <Name>AM-Set-CORS-Headers</Name>
+            </Step>
+        </Response>
+    </PreFlow>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <Flows>
+        <Flow name="CORS Preflight">
+            <Description>Handle CORS Preflight Requests</Description>
+            <Request>
+                <Step>
+                    <Name>AM-Set-CORS-Headers</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>AM-Set-CORS-Headers</Name>
+                </Step>
+            </Response>
+            <Condition>(request.verb = "OPTIONS")</Condition>
+        </Flow>
+    </Flows>
+    <HTTPProxyConnection>
+        <BasePath>/ipification</BasePath>
+    </HTTPProxyConnection>
+    <RouteRule name="default">
+        <TargetEndpoint>default</TargetEndpoint>
+    </RouteRule>
+</ProxyEndpoint>
