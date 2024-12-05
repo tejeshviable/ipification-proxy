@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DecodeJWT name="Decode-JWT-Token">
+    <JWT>{jwt}</JWT>
+    <!-- Use the extracted token -->
+    <Claims>
+        <Claim name="client_id" variable="client_id"/>
+    </Claims>
+</DecodeJWT>

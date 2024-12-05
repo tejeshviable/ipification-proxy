@@ -10,6 +10,7 @@
         <Response/>
     </PostFlow>
     <HTTPTargetConnection>
-        <URL>http://3.238.201.69:7035</URL>
+        <!-- <URL>http://3.238.201.69:7035</URL> -->
+        <URL>http://18.214.146.236:7042</URL>
     </HTTPTargetConnection>
 </TargetEndpoint>

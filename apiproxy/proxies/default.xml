@@ -4,12 +4,24 @@
         <Request>
             <Step>
                 <Name>OAuthV2-verify-jwt</Name>
-                <Condition>(proxy.pathsuffix != "/api/v1/ipification/callback")</Condition>
+                <Condition>(proxy.pathsuffix !~ "/api/v1/id-auth/callback/*")</Condition>
+            </Step>
+            <Step>
+                <Name>EV-Extract-Bearer-Token</Name>
+                <Condition>(proxy.pathsuffix !~ "/api/v1/id-auth/callback/*")</Condition>
+            </Step>
+            <Step>
+                <Name>Decode-JWT-Token</Name>
+                <Condition>(proxy.pathsuffix !~ "/api/v1/id-auth/callback/*")</Condition>
             </Step>
         </Request>
         <Response>
             <Step>
                 <Name>AM-Set-CORS-Headers</Name>
+            </Step>
+            <Step>
+                <Name>AM-Set-ClientID</Name>
+                <Condition>(proxy.pathsuffix !~ "/api/v1/id-auth/callback/*")</Condition>
             </Step>
         </Response>
     </PreFlow>
@@ -34,7 +46,7 @@
         </Flow>
     </Flows>
     <HTTPProxyConnection>
-        <BasePath>/ipification</BasePath>
+        <BasePath>/id-auth</BasePath>
     </HTTPProxyConnection>
     <RouteRule name="default">
         <TargetEndpoint>default</TargetEndpoint>
