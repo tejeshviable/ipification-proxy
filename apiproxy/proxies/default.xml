@@ -48,7 +48,12 @@
     <HTTPProxyConnection>
         <BasePath>/id-auth</BasePath>
     </HTTPProxyConnection>
-    <RouteRule name="default">
-        <TargetEndpoint>default</TargetEndpoint>
+    <RouteRule name="id-auth">
+        <Condition>(proxy.pathsuffix ~ "/api/v1/id-auth/*")</Condition>
+        <TargetEndpoint>id-auth</TargetEndpoint>
+    </RouteRule>
+    <RouteRule name="apigee-metrices">
+        <Condition>(proxy.pathsuffix ~ "/api/apigee/*")</Condition>
+        <TargetEndpoint>apigee-metrices</TargetEndpoint>
     </RouteRule>
 </ProxyEndpoint>
