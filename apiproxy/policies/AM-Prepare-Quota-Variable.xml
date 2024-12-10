@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage name="AM-Prepare-Quota-Variable">
+    <DisplayName>AM-Prepare-Quota-Variable</DisplayName>
+    <AssignVariable>
+        <Name>quota_limit</Name>
+        <Template>{verifyapikey.Verify-API-Key.quota}</Template>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>time_limit</Name>
+        <Template>{verifyapikey.Verify-API-Key.time_limit}</Template>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>time_unit</Name>
+        <Template>{verifyapikey.Verify-API-Key.time_unit}</Template>
+    </AssignVariable>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</AssignMessage>

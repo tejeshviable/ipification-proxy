@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<VerifyAPIKey name="Verify-API-Key">
+    <DisplayName>Verify-API-Key</DisplayName>
+    <APIKey ref="client_id"/>
+    <!-- Use the extracted client_id -->
+    <Attributes/>
+</VerifyAPIKey>
