@@ -1,63 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ProxyEndpoint name="default">
     <PreFlow name="PreFlow">
-        <Request>
-            <Step>
-                <Name>OAuthV2-verify-jwt</Name>
-                <Condition>(proxy.pathsuffix !~ "/api/v1/id-auth/callback/*")</Condition>
-            </Step>
-            <Step>
-                <Name>EV-Extract-Bearer-Token</Name>
-                <Condition>(proxy.pathsuffix !~ "/api/v1/id-auth/callback/*")</Condition>
-            </Step>
-            <Step>
-                <Name>Decode-JWT-Token</Name>
-                <Condition>(proxy.pathsuffix !~ "/api/v1/id-auth/callback/*")</Condition>
-            </Step>
-            <Step>
-                <Name>Verify-API-Key</Name>
-                <Condition>(proxy.pathsuffix !~ "/api/v1/id-auth/callback/*")</Condition>
-            </Step>
-            <Step>
-                <Name>AM-Prepare-Quota-Variable</Name>
-            </Step>
-            <!--<Step>-->
-            <!--    <Name>Extract-Quota-Variable</Name>-->
-            <!--    <Condition>(proxy.pathsuffix !~ "/api/v1/id-auth/callback/*")</Condition>-->
-            <!--</Step>-->
-            <Step>
-                <Name>Dynamic-Quota</Name>
-                <Condition>(proxy.pathsuffix ~ "/api/v1/id-auth/authenticate")</Condition>
-            </Step>
-        </Request>
-        <Response>
-            <Step>
-                <Name>AM-Set-CORS-Headers</Name>
-            </Step>
-            <Step>
-                <Name>AM-Set-ClientID</Name>
-                <Condition>(proxy.pathsuffix !~ "/api/v1/id-auth/callback/*")</Condition>
-            </Step>
-        </Response>
     </PreFlow>
     <PostFlow name="PostFlow">
         <Request/>
         <Response/>
     </PostFlow>
     <Flows>
-        <Flow name="CORS Preflight">
-            <Description>Handle CORS Preflight Requests</Description>
+        <Flow name="Verify">
             <Request>
                 <Step>
-                    <Name>AM-Set-CORS-Headers</Name>
+                    <Name>CORS-1</Name>
+                </Step>
+                <Step>
+                    <Name>OAuthV2-verify-jwt</Name>
+                    <Condition>(proxy.pathsuffix !~ "/api/v1/id-auth/callback/*")</Condition>
+                </Step>
+                <Step>
+                    <Name>EV-Extract-Bearer-Token</Name>
+                    <Condition>(proxy.pathsuffix !~ "/api/v1/id-auth/callback/*")</Condition>
+                </Step>
+                <Step>
+                    <Name>Decode-JWT-Token</Name>
+                    <Condition>(proxy.pathsuffix !~ "/api/v1/id-auth/callback/*")</Condition>
+                </Step>
+                <Step>
+                    <Name>Verify-API-Key</Name>
+                    <Condition>(proxy.pathsuffix !~ "/api/v1/id-auth/callback/*")</Condition>
+                </Step>
+                <Step>
+                    <Name>AM-Prepare-Quota-Variable</Name>
+                </Step>
+                <Step>
+                    <Name>Dynamic-Quota</Name>
+                    <Condition>(proxy.pathsuffix ~ "/api/v1/id-auth/authenticate")</Condition>
                 </Step>
             </Request>
             <Response>
                 <Step>
-                    <Name>AM-Set-CORS-Headers</Name>
+                    <Name>AM-Set-ClientID</Name>
+                    <!--<Condition>(proxy.pathsuffix !~ "/api/v1/id-auth/callback/*")</Condition>-->
+                    <Condition>(request.verb != "OPTIONS")</Condition>
                 </Step>
             </Response>
-            <Condition>(request.verb = "OPTIONS")</Condition>
         </Flow>
     </Flows>
     <HTTPProxyConnection>
@@ -67,8 +52,12 @@
         <Condition>(proxy.pathsuffix ~ "/api/v1/id-auth/*")</Condition>
         <TargetEndpoint>id-auth</TargetEndpoint>
     </RouteRule>
+    <RouteRule name="audit-management">
+        <Condition>(proxy.pathsuffix ~ "/api/v1/audit/*")</Condition>
+        <TargetEndpoint>id-auth</TargetEndpoint>
+    </RouteRule>
     <RouteRule name="apigee-metrices">
-        <Condition>(proxy.pathsuffix ~ "/api/apigee/*")</Condition>
-        <TargetEndpoint>apigee-metrices</TargetEndpoint>
+        <Condition>(proxy.pathsuffix ~ "/api/v1/matrix/*")</Condition>
+        <TargetEndpoint>apigee-metrices-wrapper</TargetEndpoint>
     </RouteRule>
 </ProxyEndpoint>

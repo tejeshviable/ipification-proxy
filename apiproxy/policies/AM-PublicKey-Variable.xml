@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<AssignMessage name="AM-PublicKey-Variable">
-    <AssignVariable>
-        <Name>public.rsa-publickey-1</Name>
-        <Ref>propertyset.secrets.rsa-publickey-1</Ref>
-    </AssignVariable>
-</AssignMessage>

@@ -3,13 +3,8 @@
     <DisplayName>Dynamic-Quota</DisplayName>
     <Distributed>true</Distributed>
     <Synchronous>false</Synchronous>
-    <!--<Allow ref="app.quota_limit"/>-->
     <Allow countRef="quota_limit"/>
-    <!-- Dynamically set the quota limit -->
-    <!--<Interval>1</Interval>-->
-    <!--<TimeUnit>minute</TimeUnit>-->
     <Interval ref="time_limit"/>
     <TimeUnit ref="time_unit"/>
     <Identifier ref="client_id"/>
-    <!-- Apply quota per client_id -->
 </Quota>
